@@ -1,7 +1,6 @@
 sudo: required
 dist: trusty
-language: c++
-cache: ccache
+language: generic
 
 env:
   global:
@@ -13,12 +12,9 @@ env:
     - ROS_DISTRO="kinetic"
     - ROS_DISTRO="lunar"
 
-matrix:
-  allow_failures:
-    - env: ROS_DISTRO="kinetic"
-
 install:
   - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
 script:
   - source .ci_config/travis.sh
+  - docker ps
 
