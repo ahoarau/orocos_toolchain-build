@@ -6,12 +6,11 @@ env:
   global:
     - UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/kuka-isir/rtt_lwr/rtt_lwr-2.0/lwr_utils/config/orocos_toolchain-2.9.rosinstall
     - ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu
-    - BEFORE_SCRIPT="cd /root/catkin_ws/src/orocos_toolchain/orogen && git remote add ahoarau https://github.com/ahoarau/orogen && git fetch ahoarau && git checkout ahoarau/fix-catkin-dep && source /opt/ros/indigo/setup.bash"
   matrix:
-    - ROS_DISTRO="indigo"
-    - ROS_DISTRO="jade"
-    - ROS_DISTRO="kinetic"
-    - ROS_DISTRO="lunar"
+    - ROS_DISTRO="indigo" BEFORE_SCRIPT="rm -rf /root/catkin_ws/src/orocos_toolchain/orogen && source /opt/ros/indigo/setup.bash"
+    - ROS_DISTRO="jade" BEFORE_SCRIPT="rm -rf /root/catkin_ws/src/orocos_toolchain/orogen && source /opt/ros/jade/setup.bash"
+    - ROS_DISTRO="kinetic" BEFORE_SCRIPT="rm -rf /root/catkin_ws/src/orocos_toolchain/orogen && source /opt/ros/kinetic/setup.bash"
+    - ROS_DISTRO="lunar" BEFORE_SCRIPT="rm -rf /root/catkin_ws/src/orocos_toolchain/orogen && source /opt/ros/lunar/setup.bash"
 
 install:
   - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
