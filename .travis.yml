@@ -10,8 +10,10 @@ env:
     - BEFORE_SCRIPT="rm /root/catkin_ws/src/orocos_toolchain/orogen/manifest.xml"
     - NO_BUILD_TESTS=true
     - NO_TEST_INSTALL=true
-    - CATKIN_PARALLEL_JOBS='-p1'
-    - ROS_PARALLEL_JOBS='-j1'
+    - CATKIN_PARALLEL_JOBS='-p2'
+    - ROS_PARALLEL_JOBS='-j2'
+    - DOCKER_RUN_OPTS="-v $HOME/install:/root/catkin_ws/install"
+    
   matrix:
     - ROS_DISTRO="indigo"
     - ROS_DISTRO="jade"
@@ -22,4 +24,5 @@ install:
   - git clone https://github.com/ros-industrial/industrial_ci.git .ci_config
 script:
   - source .ci_config/travis.sh
+  - ls $HOME/install
 
