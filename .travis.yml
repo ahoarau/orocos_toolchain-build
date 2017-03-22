@@ -9,9 +9,8 @@ env:
     # rosdep fix , discussed here https://github.com/orocos-toolchain/orogen/issues/88
     - BEFORE_SCRIPT="rm /root/catkin_ws/src/orocos_toolchain/orogen/manifest.xml"
     - NOT_TEST_BUILD=true
-    - NOT_TEST_INSTALL=true
-    - CATKIN_PARALLEL_JOBS='-p2'
-    - ROS_PARALLEL_JOBS='-j2'
+    - CATKIN_PARALLEL_JOBS='-p3'
+    - ROS_PARALLEL_JOBS='-j3'
     - DOCKER_RUN_OPTS="-v $HOME/install:/root/catkin_ws/install"
     
   matrix:
