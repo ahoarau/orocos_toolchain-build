@@ -25,5 +25,13 @@ install:
 script:
   - mkdir $HOME/install
   - source .ci_config/travis.sh
-  - ls $HOME/install
+
+deploy:
+  provider: releases
+  api-key: $API_TOKEN
+  file_glob: true
+  file: $HOME/install/*
+  skip_cleanup: true
+  on:
+    branch: master
 
