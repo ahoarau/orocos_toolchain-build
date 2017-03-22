@@ -23,6 +23,7 @@ env:
 install:
   - git clone https://github.com/ipa-mdl/industrial_ci -b fix/install-space .ci_config
 script:
+  - mkdir $HOME/install
   - source .ci_config/travis.sh
   - ls $HOME/install
 
