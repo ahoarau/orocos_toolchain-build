@@ -25,12 +25,13 @@ install:
 script:
   - mkdir $HOME/install
   - source .ci_config/travis.sh
+  - tar -czf $HOME/orocos_toolchain-2.9-$(uname -m)-$(lsb_release -cs)-release.tar.gz -C $HOME/install/ .
 
 deploy:
   provider: releases
-  api-key: $API_TOKEN
-  file_glob: true
-  file: $HOME/install/*
+  api-key: 
+      secure: $API_TOKEN
+  file: $HOME/orocos_toolchain-2.9-$(uname -m)-$(lsb_release -cs)-release.tar.gz
   skip_cleanup: true
   on:
     branch: master
