@@ -9,7 +9,7 @@ env:
     # rosdep fix , discussed here https://github.com/orocos-toolchain/orogen/issues/88
     - BEFORE_SCRIPT="export CXX='ccache g++' CC='ccache gcc' && rm /root/catkin_ws/src/orocos_toolchain/orogen/manifest.xml"
     - NOT_TEST_BUILD=true
-    - CATKIN_PARALLEL_JOBS="-p3"
+    - CATKIN_PARALLEL_JOBS="-p3 --cmake-args -DCMAKE_BUILD_TYPE=Release -DENABLE_CORBA=ON -DCORBA_IMPLEMENTATION=OMNIORB --"
     - ROS_PARALLEL_JOBS="-j3"
     - DOCKER_RUN_OPTS="-v $HOME/install:/root/catkin_ws/install"
     - ADDITIONAL_DEBS="ccache"
