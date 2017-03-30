@@ -7,12 +7,11 @@ env:
     - UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/kuka-isir/rtt_lwr/rtt_lwr-2.0/lwr_utils/config/orocos_toolchain-2.9.rosinstall
     - ROS_REPOSITORY_PATH=http://packages.ros.org/ros/ubuntu
     # rosdep fix , discussed here https://github.com/orocos-toolchain/orogen/issues/88
-    - BEFORE_SCRIPT="export CXX='ccache g++' CC='ccache gcc' && rm /root/catkin_ws/src/orocos_toolchain/orogen/manifest.xml"
+    - BEFORE_SCRIPT="rm /root/catkin_ws/src/orocos_toolchain/orogen/manifest.xml"
     - NOT_TEST_BUILD=true
     - CATKIN_PARALLEL_JOBS="-p3 --cmake-args -DCMAKE_BUILD_TYPE=Release -DENABLE_CORBA=ON -DCORBA_IMPLEMENTATION=OMNIORB --"
     - ROS_PARALLEL_JOBS="-j3"
     - DOCKER_RUN_OPTS="-v $HOME/install:/root/catkin_ws/install"
-    - ADDITIONAL_DEBS="ccache"
     
   matrix:
     - ROS_DISTRO="indigo"
@@ -25,13 +24,13 @@ install:
 script:
   - mkdir $HOME/install
   - source .ci_config/travis.sh
-  - tar -czf $HOME/orocos_toolchain-2.9-$ROS_DISTRO-$(uname -m)-$(lsb_release -cs)-release.tar.gz -C $HOME/install/ .
+  - tar -czf $HOME/orocos_toolchain-2.9-$ROS_DISTRO-release.tar.gz -C $HOME/install/ .
 
 deploy:
   provider: releases
   api-key: 
       secure: $API_TOKEN
-  file: $HOME/orocos_toolchain-2.9-$ROS_DISTRO-$(uname -m)-$(lsb_release -cs)-release.tar.gz
+  file: $HOME/orocos_toolchain-2.9-$ROS_DISTRO-release.tar.gz
   skip_cleanup: true
   on:
     branch: master
