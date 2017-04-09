@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 
 repo_url=https://api.github.com/repos/ahoarau/orocos_toolchain-build/releases
 
