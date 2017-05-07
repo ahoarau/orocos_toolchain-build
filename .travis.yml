@@ -2,6 +2,10 @@ sudo: required
 dist: trusty
 language: generic
 
+branches:
+  only:
+  - master
+
 env:
   global:
     - UPSTREAM_WORKSPACE=https://raw.githubusercontent.com/kuka-isir/rtt_lwr/rtt_lwr-2.0/lwr_utils/config/orocos_toolchain-2.9.rosinstall
@@ -25,6 +29,15 @@ script:
   - mkdir $HOME/install
   - source .ci_config/travis.sh
   - tar -czf $HOME/orocos_toolchain-2.9-$ROS_DISTRO-release.tar.gz -C $HOME/install/ .
+
+after_success:
+  - git config --global user.email "builds@travis-ci.com"
+  - git config --global user.name "Travis CI"
+  - export GIT_TAG=build-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
+  - echo -n $GIT_TAG > public/version
+  - git commit -m "Build VERSION number" public/version
+  - git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+  - git push --quiet https://$API_TOKEN@github.com/ahoarau/orocos_toolchain-build $GIT_TAG > /dev/null 2>&1
 
 deploy:
   provider: releases
