@@ -4,12 +4,12 @@ repo_url=https://api.github.com/repos/ahoarau/orocos_toolchain-build/releases
 
 curl_releases=$(curl -s $repo_url)
 
-list_of_tags=$(echo $curl_releases | grep tag_name | cut -d '"' -f 4)
+list_of_tags=$(echo "$curl_releases" | grep tag_name | cut -d '"' -f 4)
 
 echo "List of tags :\n$list_of_tags"
 
 for tag in $list_of_tags; do
-    latest_release_url=$(echo $curl_releases | grep $tag | grep browser_download_url | cut -d '"' -f 4 | grep $ROS_DISTRO)
+    latest_release_url=$(echo "$curl_releases" | grep $tag | grep browser_download_url | cut -d '"' -f 4 | grep $ROS_DISTRO)
     if [ ! -z $latest_release_url ]; then
         break
     fi
